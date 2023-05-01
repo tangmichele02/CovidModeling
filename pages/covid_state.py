@@ -6,9 +6,9 @@ from datetime import datetime as dt
 from datetime import date
 import plotly.express as px
 import plotly.graph_objs as go
-# import geopandas
+import geopandas
 import streamlit as st 
-# import geopy
+import geopy
 import plotly.figure_factory as ff
 
 # apiKey = st.secrets["apiKey"]
