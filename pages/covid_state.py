@@ -53,12 +53,84 @@ def make_graph(df):
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig
 
+
+def get_dates(): 
+    """
+    makes datetime objects for first day and today's date 
+
+    return: (tuple) start date and end date as datetime objects 
+    """
+    start_date = date(2020, 3, 9)  #  I need some range in the past
+    end_date = date(2023, 4, 23)
+    # end_date = dt.now().date()
+    return (start_date, end_date)
+
+
+def get_num_days(): 
+    """
+    gets total number of days between start date and end date
+
+    return: (int) total number of days between start date and end date 
+    """
+    start_date, end_date = get_dates()
+    max_days = end_date-start_date
+    max_days_int = max_days.days
+    return max_days_int
+
+
+def make_date_range():
+    """
+    creates list of dates (as strings) for selector bar 
+
+    return: (list of str) list of dates 
+    """
+    date_range = []
+
+    start_date = get_dates()[0]
+    max_days_int = get_num_days()
+
+    for day in range(max_days_int + 1):
+        date_val = (start_date + timedelta(days = day)).strftime("%b %d, %Y")
+        date_range.append(date_val)
+
+    return date_range
+
+
+
+
 def main(): 
 
-    state_data_timeseries = get_state_data("WA")
-    df = dev_data(state_data_timeseries, "2023-04-30")
-    st.dataframe(df)
+    cols1,_ = st.columns((8,4)) 
+
+    date_range = make_date_range()
+
+    with st.sidebar:
+
+        date_sel = st.slider(
+            "Select a date",
+            options = date_range,
+            value = (date_range[0], date_range[-1])
+        )
+
+        state_option = st.selectbox(
+            "Select State",
+            ("AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", 
+             "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA",
+             "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "NE", "NH",
+             "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", 
+             "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WI", "WV", "WY"
+             )
+        )
+    
+    date_object = dt.strptime(date_sel, "%b %d, %Y")
+    new_date_str = date_object.strftime("%Y-%m-%d")
+
+    state_data_timeseries = get_state_data(state_option)
+    df = dev_data(state_data_timeseries, new_date_str)
+
     st.plotly_chart(make_graph(df))
+    st.write("Cases Table")
+    st.dataframe(df)
 
 main()
 
