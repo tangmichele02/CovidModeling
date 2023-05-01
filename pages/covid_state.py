@@ -42,20 +42,21 @@ def dev_data(data_timeseries, date):
                 break
             
     df = pd.DataFrame(list(zip(fips_vals, cases, deaths)),
-                  columns = ["fips", "cases", "deaths"])
+                  columns = ["fips", "Cases", "Deaths"])
     return df 
 
-def make_graph(df): 
+def make_graph(df, type): 
 
     with open('./pages/geojson-counties-fips.json', 'r') as response:
         counties = json.load(response)
 
-    fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
+    fig = px.choropleth(df, geojson=counties, locations='fips', color=type,
                            color_continuous_scale="Viridis",
                            scope = "usa",
-                           labels={'cases':'Cases'}
+                           labels={type:type},
                           )
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.update_ti
     return fig
 
 
@@ -117,6 +118,10 @@ def main():
             max_value = dates[-1]
         )
 
+        map_option = st.selectbox(
+            "Select map type",
+            ("Cases", "Deaths")
+        )
         state_option = st.selectbox(
             "Select State",
             ("AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", 
@@ -127,29 +132,17 @@ def main():
              )
         )
     
-    # date_object = dt.strptime(date_sel, "%b %d, %Y")
     new_date_str = date_sel.strftime("%Y-%m-%d")
     st.write(new_date_str)
     state_data_timeseries = get_state_data(state_option)
     df = dev_data(state_data_timeseries, new_date_str)
-
-    st.plotly_chart(make_graph(df))
+    st.write("Total Cases for " + state_option + " on " + new_date_str)
+    st.plotly_chart(make_graph(df, map_option))
     st.write("Cases Table")
     st.dataframe(df)
 
 main()
 
 # references: 
-# https://medium.com/@arun_prakash/mastering-apis-and-json-with-python-2685dfb0a115
-# https://www.section.io/engineering-education/missing-values-in-time-series/
-# https://www.digitalocean.com/community/tutorials/python-string-to-datetime-strptime
-# https://medium.com/nerd-for-tech/how-to-plot-timeseries-data-in-python-and-plotly-1382d205cc2
-# https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html
-# https://discuss.streamlit.io/t/datetime-slider/163/12
-# https://www.geeksforgeeks.org/creating-a-list-of-range-of-dates-in-python/
-# https://plotly.com/python/figure-labels/
-# https://stackoverflow.com/questions/1060279/iterating-through-a-range-of-dates-in-python
-# https://www.digitalocean.com/community/tutorials/python-string-to-datetime-strptime
-# https://plotly.com/python/graph-objects/
 
 # downloaded geo-json-counties-fips.json from https://github.com/plotly/datasets/blob/master/geojson-counties-fips.json
