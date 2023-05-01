@@ -10,50 +10,60 @@ import geopandas
 import streamlit as st 
 import geopy
 import plotly.figure_factory as ff
-# import plotly_geo
+import plotly_geo
+from urllib.request import urlopen
 
-# apiKey = st.secrets["apiKey"]
-# state = "WA"
+apiKey = st.secrets["apiKey"]
+state = "WA"
 
-# def get_state_data(state): 
-#     """
-#     makes api query to COVID Act Now for individual state data 
+def get_state_data(state): 
+    """
+    makes api query to COVID Act Now for individual state data 
 
-#     param state (str): relevant state
+    param state (str): relevant state
 
-#     return: (dict) json of state data 
-#     """
-#     response_state_timeseries = requests.get(f"https://api.covidactnow.org/v2/county/{state}.json?apiKey={apiKey}")
+    return: (dict) json of state data 
+    """
+    response_state_timeseries = requests.get(f"https://api.covidactnow.org/v2/county/{state}.timeseries.json?apiKey={apiKey}")
 
-#     # checks access
-#     if response_state_timeseries.status_code == 200:
-#         data_timeseries = response_state_timeseries.json()
-#         return data_timeseries
+    # checks access
+    if response_state_timeseries.status_code == 200:
+        data_timeseries = response_state_timeseries.json()
+        return data_timeseries
 
-# data_timeseries_state = get_state_data(state)
+def dev_data(data_timeseries, date):
 
-# fips = []
-# vals = []
-# for val in data_timeseries_state: 
-#     fips.append(val["fips"])
-#     vals.append(val["hsaPopulation"])
+    fips_vals = []
+    cases = []
+    deaths = []
+    for val in data_timeseries_state: 
+        if val["lastUpdatedDate"] == date:
+            fips_vals.append(val["fips"])
+            cases.append(val["actuals"]["cases"])
+            deaths.append(val["actuals"]["deaths"])
+            
+    df = pd.DataFrame(list(zip(fips_vals, cases, deaths)),
+                  columns = ["fips", "cases", "deaths"])
+    return df 
 
-# print(fips)
-# print(vals)
-# fig = ff.create_choropleth(fips=fips, values=vals)
-# fig.layout.template = None
-# fig.show()
+def make_graph(df): 
 
+    with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+        counties = json.load(response)
 
-fips = ['06021', '06023', '06027',
-        '06029', '06033', '06059',
-        '06047', '06049', '06051',
-        '06055', '06061']
-values = range(len(fips))
+    fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
+                           color_continuous_scale="Viridis",
+                           scope = "usa",
+                           labels={'cases':'Cases'}
+                          )
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    return fig
 
-fig = ff.create_choropleth(fips=fips, values=values)
-fig.layout.template = None
-fig.show()
+def main(): 
+
+    state_data_timeseries = get_state_data("WA")
+    df = dev_data(state_data_timeseries, "2022-04-30")
+    st.write(make_graph(df))
 
 # references: 
 # https://medium.com/@arun_prakash/mastering-apis-and-json-with-python-2685dfb0a115
