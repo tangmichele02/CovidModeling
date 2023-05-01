@@ -124,7 +124,7 @@ def main():
     
     # date_object = dt.strptime(date_sel, "%b %d, %Y")
     new_date_str = date_sel.strftime("%Y-%m-%d")
-
+    st.write(new_date_str)
     state_data_timeseries = get_state_data(state_option)
     df = dev_data(state_data_timeseries, new_date_str)
 
