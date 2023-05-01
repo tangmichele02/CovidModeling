@@ -108,7 +108,7 @@ def main():
 
         date_sel = st.slider(
             label = "Select a date",
-            value = (date_range[0], date_range[-1])
+            value = (get_dates[0], get_dates[-1])
         )
 
         state_option = st.selectbox(
@@ -121,8 +121,8 @@ def main():
              )
         )
     
-    date_object = dt.strptime(date_sel, "%b %d, %Y")
-    new_date_str = date_object.strftime("%Y-%m-%d")
+    # date_object = dt.strptime(date_sel, "%b %d, %Y")
+    new_date_str = date_sel.strftime("%Y-%m-%d")
 
     state_data_timeseries = get_state_data(state_option)
     df = dev_data(state_data_timeseries, new_date_str)
