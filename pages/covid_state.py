@@ -11,7 +11,7 @@ import streamlit as st
 import geopy
 import plotly.figure_factory as ff
 import plotly_geo
-from urllib.request import urlopen
+# from urllib.request import urlopen
 
 apiKey = st.secrets["apiKey"]
 state = "WA"
@@ -46,24 +46,24 @@ def dev_data(data_timeseries, date):
                   columns = ["fips", "cases", "deaths"])
     return df 
 
-def make_graph(df): 
+# def make_graph(df): 
 
-    with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
-        counties = json.load(response)
+#     with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+#         counties = json.load(response)
 
-    fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
-                           color_continuous_scale="Viridis",
-                           scope = "usa",
-                           labels={'cases':'Cases'}
-                          )
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    return fig
+#     fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
+#                            color_continuous_scale="Viridis",
+#                            scope = "usa",
+#                            labels={'cases':'Cases'}
+#                           )
+#     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+#     return fig
 
 def main(): 
 
     state_data_timeseries = get_state_data("WA")
     df = dev_data(state_data_timeseries, "2022-04-30")
-    st.write(make_graph(df))
+    # st.write(make_graph(df))
 
 # references: 
 # https://medium.com/@arun_prakash/mastering-apis-and-json-with-python-2685dfb0a115
