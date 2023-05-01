@@ -8,6 +8,7 @@ import plotly.express as px
 import plotly.graph_objs as go
 import streamlit as st 
 
+apiKey = st.secrets["apiKey"]
 
 def get_country_data(): 
     """
