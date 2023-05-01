@@ -30,11 +30,15 @@ def dev_data(data_timeseries, date):
     fips_vals = []
     cases = []
     deaths = []
-    for val in data_timeseries: 
-        if val["lastUpdatedDate"] == date:
-            fips_vals.append(val["fips"])
-            cases.append(val["actuals"]["cases"])
-            deaths.append(val["actuals"]["deaths"])
+    for county in data_timeseries: 
+
+        for val in county["actualsTimeseries"]: 
+
+            if val["date"] == date:
+                fips_vals.append(val["fips"])
+                cases.append(val["actuals"]["cases"])
+                deaths.append(val["actuals"]["deaths"])
+                break
             
     df = pd.DataFrame(list(zip(fips_vals, cases, deaths)),
                   columns = ["fips", "cases", "deaths"])
@@ -126,7 +130,7 @@ def main():
     new_date_str = date_sel.strftime("%Y-%m-%d")
     st.write(new_date_str)
     state_data_timeseries = get_state_data(state_option)
-    df = dev_data(state_data_timeseries, "2023-04-30")
+    df = dev_data(state_data_timeseries, new_date_str)
 
     st.plotly_chart(make_graph(df))
     st.write("Cases Table")
