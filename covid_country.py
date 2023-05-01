@@ -79,8 +79,8 @@ def get_dates():
     return: (tuple) start date and end date as datetime objects 
     """
     start_date = date(2020, 3, 9)  #  I need some range in the past
-    # end_date = date(2023, 4, 23)
-    end_date = dt.now().date() - timedelta(days=1)
+    end_date = date(2023, 4, 27)
+    # end_date = dt.now().date() - timedelta(days=1)
     return (start_date, end_date)
 
 
