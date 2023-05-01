@@ -33,11 +33,12 @@ def dev_data(data_timeseries, date):
     for county in data_timeseries: 
 
         fips_vals.append(county["fips"])
+
         for val in county["actualsTimeseries"]: 
 
             if val["date"] == date:
-                cases.append(val["actuals"]["cases"])
-                deaths.append(val["actuals"]["deaths"])
+                cases.append(val["cases"])
+                deaths.append(val["deaths"])
                 break
             
     df = pd.DataFrame(list(zip(fips_vals, cases, deaths)),
