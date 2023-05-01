@@ -6,11 +6,11 @@ from datetime import datetime as dt
 from datetime import date
 import plotly.express as px
 import plotly.graph_objs as go
-import geopandas
+# import geopandas
 import streamlit as st 
-import geopy
+# import geopy
 import plotly.figure_factory as ff
-import plotly_geo
+# import plotly_geo
 # from urllib.request import urlopen
 
 apiKey = st.secrets["apiKey"]
@@ -46,24 +46,24 @@ def dev_data(data_timeseries, date):
                   columns = ["fips", "cases", "deaths"])
     return df 
 
-# def make_graph(df): 
+def make_graph(df): 
 
-#     with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
-#         counties = json.load(response)
+    with open('geojson-counties-fips.json', 'r') as response:
+        counties = json.load(response)
 
-#     fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
-#                            color_continuous_scale="Viridis",
-#                            scope = "usa",
-#                            labels={'cases':'Cases'}
-#                           )
-#     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-#     return fig
+    fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
+                           color_continuous_scale="Viridis",
+                           scope = "usa",
+                           labels={'cases':'Cases'}
+                          )
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    return fig
 
 def main(): 
 
     state_data_timeseries = get_state_data("WA")
     df = dev_data(state_data_timeseries, "2022-04-30")
-    # st.write(make_graph(df))
+    st.write(make_graph(df))
 
 # references: 
 # https://medium.com/@arun_prakash/mastering-apis-and-json-with-python-2685dfb0a115
@@ -77,3 +77,5 @@ def main():
 # https://stackoverflow.com/questions/1060279/iterating-through-a-range-of-dates-in-python
 # https://www.digitalocean.com/community/tutorials/python-string-to-datetime-strptime
 # https://plotly.com/python/graph-objects/
+
+# downloaded geo-json-counties-fips.json from https://github.com/plotly/datasets/blob/master/geojson-counties-fips.json
