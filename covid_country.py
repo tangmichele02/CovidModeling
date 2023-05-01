@@ -75,7 +75,7 @@ def cases_fig(title_name, dates, cases, start_date_object, end_date_object):
 def get_dates(): 
     """
     makes datetime objects for first day and last recorded date 
-    
+
     return: (tuple) start date and end date as datetime objects 
     """
     start_date = date(2020, 3, 9)  #  I need some range in the past
@@ -158,6 +158,7 @@ main()
 
 
 # references: 
+# non-exhaustive: will add additional sources later
 # https://medium.com/@arun_prakash/mastering-apis-and-json-with-python-2685dfb0a115
 # https://www.section.io/engineering-education/missing-values-in-time-series/
 # https://www.digitalocean.com/community/tutorials/python-string-to-datetime-strptime
