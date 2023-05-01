@@ -9,3 +9,4 @@ pyshp==1.2.10
 shapely
 plotly
 geopy
+urllib
