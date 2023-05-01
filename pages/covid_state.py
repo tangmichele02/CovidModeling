@@ -107,8 +107,7 @@ def main():
     with st.sidebar:
 
         date_sel = st.slider(
-            "Select a date",
-            options = date_range,
+            label = "Select a date",
             value = (date_range[0], date_range[-1])
         )
 
