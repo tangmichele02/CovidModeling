@@ -108,7 +108,8 @@ def main():
 
         date_sel = st.slider(
             label = "Select a date",
-            value = (dates[0], dates[-1])
+            min_value = dates[0], 
+            max_value = dates[-1]
         )
 
         state_option = st.selectbox(
