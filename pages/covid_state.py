@@ -11,9 +11,7 @@ import streamlit as st
 # import geopy
 import plotly.figure_factory as ff
 
-
-apiKey = st.secrets["apiKey"]
-state = "wa"
+state = "WA"
 
 def get_state_data(state): 
     """
