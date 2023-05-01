@@ -66,41 +66,8 @@ def get_dates():
     return: (tuple) start date and end date as datetime objects 
     """
     start_date = date(2020, 3, 9)  #  I need some range in the past
-    end_date = date(2023, 4, 23)
-    # end_date = dt.now().date()
+    end_date = dt.now().date()
     return (start_date, end_date)
-
-
-def get_num_days(): 
-    """
-    gets total number of days between start date and end date
-
-    return: (int) total number of days between start date and end date 
-    """
-    start_date, end_date = get_dates()
-    max_days = end_date-start_date
-    max_days_int = max_days.days
-    return max_days_int
-
-
-def make_date_range():
-    """
-    creates list of dates (as strings) for selector bar 
-
-    return: (list of str) list of dates 
-    """
-    date_range = []
-
-    start_date = get_dates()[0]
-    max_days_int = get_num_days()
-
-    for day in range(max_days_int + 1):
-        date_val = (start_date + timedelta(days = day)).strftime("%b %d, %Y")
-        date_range.append(date_val)
-
-    return date_range
-
-
 
 
 def main(): 
