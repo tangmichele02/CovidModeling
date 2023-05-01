@@ -3,5 +3,4 @@ requests
 json5
 pandas
 datetime
-plotly.express
-plotly.graph_objs
+plotly
