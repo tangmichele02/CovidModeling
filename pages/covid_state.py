@@ -57,6 +57,7 @@ def main():
 
     state_data_timeseries = get_state_data("WA")
     df = dev_data(state_data_timeseries, "2022-04-30")
+    st.dataframe(df)
     st.plotly_chart(make_graph(df))
 
 main()
