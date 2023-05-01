@@ -7,8 +7,8 @@ from datetime import date
 import plotly.express as px
 import plotly.graph_objs as go
 import geopandas
-# import streamlit as st 
-# import geopy
+import streamlit as st 
+import geopy
 import plotly.figure_factory as ff
 
 
