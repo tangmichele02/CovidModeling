@@ -10,7 +10,7 @@ import geopandas
 import streamlit as st 
 import geopy
 import plotly.figure_factory as ff
-import plotly_geo
+# import plotly_geo
 
 # apiKey = st.secrets["apiKey"]
 # state = "WA"
