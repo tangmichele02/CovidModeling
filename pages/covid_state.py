@@ -42,7 +42,7 @@ def dev_data(data_timeseries, date):
 
 def make_graph(df): 
 
-    with open('geojson-counties-fips.json', 'r') as response:
+    with open('./pages/geojson-counties-fips.json', 'r') as response:
         counties = json.load(response)
 
     fig = px.choropleth(df, geojson=counties, locations='fips', color='cases',
