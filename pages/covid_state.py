@@ -12,7 +12,7 @@ import geopy
 import plotly.figure_factory as ff
 
 
-
+apiKey = st.secrets["apiKey"]
 state = "wa"
 
 def get_state_data(state): 
