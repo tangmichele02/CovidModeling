@@ -37,6 +37,8 @@ for val in data_timeseries_state:
     fips.append(val["fips"])
     vals.append(val["hsaPopulation"])
 
+print(fips)
+print(vals)
 fig = ff.create_choropleth(fips=fips, values=vals)
 fig.layout.template = None
 fig.show()
