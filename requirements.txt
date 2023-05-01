@@ -4,8 +4,8 @@ json5
 pandas
 datetime
 plotly
-geopandas
+geopandas==0.3.0
 geopy
-plotly-geo
-pyshp
-shapely
+plotly-geo==1.0.0
+pyshp==1.2.10
+shapely==1.6.3
