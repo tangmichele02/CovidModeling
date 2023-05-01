@@ -134,6 +134,8 @@ def main():
     new_date_str = date_sel.strftime("%Y-%m-%d")
     state_data_timeseries = get_state_data(state_option)
     df = dev_data(state_data_timeseries, new_date_str)
+
+    st.title("State Data")
     st.write("**Total " + map_option + " for " + state_option + " on " + new_date_str + "**")
     st.plotly_chart(make_graph(df, map_option))
     st.write("**Cases Table**")
