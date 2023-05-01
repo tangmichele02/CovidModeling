@@ -102,13 +102,13 @@ def main():
 
     cols1,_ = st.columns((8,4)) 
 
-    date_range = make_date_range()
+    dates = get_dates()
 
     with st.sidebar:
 
         date_sel = st.slider(
             label = "Select a date",
-            value = (get_dates[0], get_dates[-1])
+            value = (dates[0], dates[-1])
         )
 
         state_option = st.selectbox(
