@@ -6,3 +6,4 @@ datetime
 plotly
 geopandas
 geopy
+plotly-geo
