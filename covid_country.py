@@ -8,6 +8,7 @@ import plotly.express as px
 import plotly.graph_objs as go
 import streamlit as st 
 
+# get apiKey from secrets
 apiKey = st.secrets["apiKey"]
 
 def get_country_data(): 
@@ -16,6 +17,7 @@ def get_country_data():
 
     return: (dict) json of country data 
     """
+
     response_country_timeseries = requests.get(f"https://api.covidactnow.org/v2/country/US.timeseries.json?apiKey={apiKey}")
 
     # checks access 
@@ -30,6 +32,7 @@ def dev_data(data_timeseries):
 
     return: tuple of lists
     """
+
     dates = []
     cases_total = []
     cases_new = []
@@ -62,6 +65,7 @@ def cases_fig(title_name, dates, cases, start_date_object, end_date_object):
 
     return: figure 
     """
+
     start_index = dates.index(start_date_object)
     end_index = dates.index(end_date_object)
 
@@ -78,6 +82,7 @@ def get_dates():
 
     return: (tuple) start date and end date as datetime objects 
     """
+
     start_date = date(2020, 3, 9)  #  I need some range in the past
     end_date = date(2023, 4, 27)
     # end_date = dt.now().date() - timedelta(days=1)
@@ -90,6 +95,7 @@ def get_num_days():
 
     return: (int) total number of days between start date and end date 
     """
+
     start_date, end_date = get_dates()
     max_days = end_date-start_date
     max_days_int = max_days.days
@@ -102,6 +108,7 @@ def make_date_range():
 
     return: (list of str) list of dates 
     """
+
     date_range = []
 
     start_date = get_dates()[0]
@@ -118,6 +125,7 @@ def main():
     """
     runs program 
     """
+    
     cols1,_ = st.columns((8,4)) 
 
     date_range = make_date_range()
