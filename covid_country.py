@@ -74,8 +74,8 @@ def cases_fig(title_name, dates, cases, start_date_object, end_date_object):
 
 def get_dates(): 
     """
-    makes datetime objects for first day and today's date 
-
+    makes datetime objects for first day and last recorded date 
+    
     return: (tuple) start date and end date as datetime objects 
     """
     start_date = date(2020, 3, 9)  #  I need some range in the past
