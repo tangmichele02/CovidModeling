@@ -49,7 +49,7 @@ fips = ['06021', '06023', '06027',
         '06029', '06033', '06059',
         '06047', '06049', '06051',
         '06055', '06061']
-values = range(len(fips))
+values = [11, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 fig = ff.create_choropleth(fips=fips, values=values)
 fig.layout.template = None
