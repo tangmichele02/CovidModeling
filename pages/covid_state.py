@@ -6,9 +6,9 @@ from datetime import datetime as dt
 from datetime import date
 import plotly.express as px
 import plotly.graph_objs as go
-import geopandas
+# import geopandas
 import streamlit as st 
-import geopy
+# import geopy
 import plotly.figure_factory as ff
 
 
@@ -31,6 +31,7 @@ def get_state_data(state):
         return data_timeseries
 
 data_timeseries_state = get_state_data(state)
+print(data_timeseries_state)
 fips = []
 vals = []
 for val in data_timeseries_state: 
