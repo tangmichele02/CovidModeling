@@ -142,8 +142,8 @@ def main():
 
     dev_data_output = dev_data(data_timeseries)
 
-    st.title("Country Data")  
-    
+    st.title("COVID-19 Country Data")  
+
     if graph_option == "All time total cases":
         st.write(cases_fig("All time total cases", dev_data_output[0], dev_data_output[1], start_date_object, end_date_object))
     elif graph_option == "New cases per day":
