@@ -126,7 +126,7 @@ def main():
     new_date_str = date_sel.strftime("%Y-%m-%d")
     st.write(new_date_str)
     state_data_timeseries = get_state_data(state_option)
-    df = dev_data(state_data_timeseries, new_date_str)
+    df = dev_data(state_data_timeseries, "2023-04-30")
 
     st.plotly_chart(make_graph(df))
     st.write("Cases Table")
