@@ -56,7 +56,6 @@ def make_graph(df, type):
                            labels={type:type},
                           )
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    fig.update_ti
     return fig
 
 
