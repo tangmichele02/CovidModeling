@@ -30,7 +30,7 @@ def dev_data(data_timeseries, date):
     fips_vals = []
     cases = []
     deaths = []
-    for val in data_timeseries_state: 
+    for val in data_timeseries: 
         if val["lastUpdatedDate"] == date:
             fips_vals.append(val["fips"])
             cases.append(val["actuals"]["cases"])
