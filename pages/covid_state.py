@@ -11,38 +11,48 @@ import streamlit as st
 # import geopy
 import plotly.figure_factory as ff
 
-apiKey = st.secrets["apiKey"]
-state = "WA"
+# apiKey = st.secrets["apiKey"]
+# state = "WA"
 
-def get_state_data(state): 
-    """
-    makes api query to COVID Act Now for individual state data 
+# def get_state_data(state): 
+#     """
+#     makes api query to COVID Act Now for individual state data 
 
-    param state (str): relevant state
+#     param state (str): relevant state
 
-    return: (dict) json of state data 
-    """
-    response_state_timeseries = requests.get(f"https://api.covidactnow.org/v2/county/{state}.json?apiKey={apiKey}")
+#     return: (dict) json of state data 
+#     """
+#     response_state_timeseries = requests.get(f"https://api.covidactnow.org/v2/county/{state}.json?apiKey={apiKey}")
 
-    # checks access
-    if response_state_timeseries.status_code == 200:
-        data_timeseries = response_state_timeseries.json()
-        return data_timeseries
+#     # checks access
+#     if response_state_timeseries.status_code == 200:
+#         data_timeseries = response_state_timeseries.json()
+#         return data_timeseries
 
-data_timeseries_state = get_state_data(state)
-print(data_timeseries_state)
-fips = []
-vals = []
-for val in data_timeseries_state: 
-    fips.append(val["fips"])
-    vals.append(val["hsaPopulation"])
+# data_timeseries_state = get_state_data(state)
 
-print(fips)
-print(vals)
-fig = ff.create_choropleth(fips=fips, values=vals)
+# fips = []
+# vals = []
+# for val in data_timeseries_state: 
+#     fips.append(val["fips"])
+#     vals.append(val["hsaPopulation"])
+
+# print(fips)
+# print(vals)
+# fig = ff.create_choropleth(fips=fips, values=vals)
+# fig.layout.template = None
+# fig.show()
+
+
+fips = ['06021', '06023', '06027',
+        '06029', '06033', '06059',
+        '06047', '06049', '06051',
+        '06055', '06061']
+values = range(len(fips))
+
+fig = ff.create_choropleth(fips=fips, values=values)
 fig.layout.template = None
 fig.show()
-
 
 # references: 
 # https://medium.com/@arun_prakash/mastering-apis-and-json-with-python-2685dfb0a115
