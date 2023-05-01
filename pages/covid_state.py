@@ -59,6 +59,8 @@ def main():
     df = dev_data(state_data_timeseries, "2022-04-30")
     st.write(make_graph(df))
 
+main()
+
 # references: 
 # https://medium.com/@arun_prakash/mastering-apis-and-json-with-python-2685dfb0a115
 # https://www.section.io/engineering-education/missing-values-in-time-series/
