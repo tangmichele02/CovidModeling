@@ -1,10 +1,7 @@
+streamlit
 requests
 json
 pandas
 datetime
 plotly.express
 plotly.graph_objs
-streamlit
-geopandas
-geopy
-plotly-geo
